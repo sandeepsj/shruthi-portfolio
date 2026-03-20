@@ -44,8 +44,8 @@
   .skill-card, .timeline-card, .highlight-card,
   .pillar-card, .contact-card { break-inside: avoid; }
 
-  /* Contact section starts on a fresh page */
-  #contact { break-before: page; }
+  /* Each section starts on a fresh page */
+  #about, #experience, #skills, #philosophy, #contact { break-before: page; }
 
   /* Show LinkedIn URL as readable text after the card */
   .contact-card[href^="https"]::after {
