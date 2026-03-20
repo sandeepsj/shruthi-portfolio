@@ -423,6 +423,11 @@ ul { list-style: none; }
   border: 3px solid var(--teal);
 }
 
+.dot-teal {
+  background: var(--teal);
+  border: 3px solid var(--bg-tint);
+}
+
 .timeline-card {
   background: var(--card);
   border: 1.5px solid var(--border);
