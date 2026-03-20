@@ -1,11 +1,11 @@
 // Set current year in footer
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// Highlight active nav link on scroll
+// Active nav link on scroll
 const sections = document.querySelectorAll('section[id]');
 const navLinks = document.querySelectorAll('.nav-links a');
 
-const observer = new IntersectionObserver(
+const sectionObserver = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
@@ -21,11 +21,11 @@ const observer = new IntersectionObserver(
   { rootMargin: '-40% 0px -55% 0px' }
 );
 
-sections.forEach((s) => observer.observe(s));
+sections.forEach((s) => sectionObserver.observe(s));
 
-// Smooth fade-in on scroll
-const fadeEls = document.querySelectorAll(
-  '.skill-card, .project-card, .stat, .contact-link'
+// Fade-in on scroll
+const fadeTargets = document.querySelectorAll(
+  '.skill-card, .timeline-card, .highlight-card, .value-match, .contact-card, .role-callout'
 );
 
 const fadeObserver = new IntersectionObserver(
@@ -41,7 +41,7 @@ const fadeObserver = new IntersectionObserver(
   { threshold: 0.1 }
 );
 
-fadeEls.forEach((el) => {
+fadeTargets.forEach((el) => {
   el.style.opacity = '0';
   el.style.transform = 'translateY(20px)';
   el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
