@@ -301,12 +301,12 @@ ul { list-style: none; }
   border-radius: 50%;
   background: #fff5ef;
   overflow: hidden;
+  isolation: isolate;
 }
 
 .avatar img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
   object-fit: cover;
   object-position: 65% 25%;
   transform: scale(1.0);
