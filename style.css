@@ -1,4 +1,64 @@
 /* =========================================================
+   PRINT — preserve exact screen appearance
+   ========================================================= */
+@media print {
+  *, *::before, *::after {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+
+  /* Keep dark backgrounds */
+  body        { background: #0f0f13 !important; color: #e2e2f0 !important; }
+  .section-alt { background: #16161d !important; }
+  .skill-card,
+  .project-card,
+  .stat,
+  .contact-link { background: #1c1c26 !important; border-color: #2a2a38 !important; }
+
+  /* Preserve gradient hero name */
+  .hero-name {
+    background: linear-gradient(135deg, #fff 40%, #a78bfa) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+  }
+
+  /* Preserve avatar gradient */
+  .avatar-placeholder {
+    background: linear-gradient(135deg, #7c6af7, #4f46e5) !important;
+    color: #fff !important;
+  }
+
+  /* Keep accent colors */
+  .hero-greeting, .hero-title, .nav-logo, .stat-number,
+  .tag, .contact-link:hover { color: #a78bfa !important; }
+
+  /* Fix layout — keep desktop side-by-side hero */
+  .hero {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    min-height: auto !important;
+    padding: 5rem 2.5rem 3rem !important;
+  }
+
+  /* Keep nav pinned at top in print */
+  .nav {
+    position: relative !important;
+    background: rgba(15,15,19,1) !important;
+    border-bottom: 1px solid #2a2a38 !important;
+  }
+  .nav-links { display: flex !important; }
+
+  /* No page breaks inside cards */
+  .skill-card, .project-card { break-inside: avoid; }
+
+  /* Remove link underlines */
+  a { text-decoration: none !important; }
+}
+
+/* =========================================================
    BASE & RESET
    ========================================================= */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
