@@ -521,6 +521,17 @@ ul { list-style: none; }
   line-height: 1.8;
 }
 
+.timeline-insight {
+  margin: 1rem 0;
+  padding: 0.75rem 1rem;
+  background: var(--orange-light);
+  border-left: 3px solid var(--orange);
+  border-radius: var(--radius-sm);
+  color: var(--text-mid);
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
 .timeline-bullets {
   list-style: none;
   margin-bottom: 1.25rem;
