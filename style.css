@@ -1,21 +1,60 @@
 /* =========================================================
-   PRINT — preserve exact screen appearance
+   PRINT — clean, professional layout
    ========================================================= */
 @media print {
   *, *::before, *::after {
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
     color-adjust: exact !important;
+    /* reveal any elements hidden by JS fade-in animation */
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
   }
 
   body { background: #fff !important; }
-  .hero { min-height: auto !important; padding-top: 5rem !important; }
-  .nav { position: relative !important; background: #fff !important; box-shadow: none !important; border-bottom: 2px solid #f0ede8 !important; }
-  .nav-links { display: flex !important; }
-  .hero-blob { display: none; }
-  .floating-tag { display: none; }
-  .skill-card, .timeline-card, .highlight-card, .pillar-card, .contact-card { break-inside: avoid; }
-  .btn { border: 2px solid #f4723a !important; color: #f4723a !important; background: transparent !important; }
+
+  /* Hide screen-only interactive/decorative elements */
+  .nav          { display: none !important; }
+  .hero-actions { display: none !important; }
+  .hero-blob    { display: none !important; }
+  .floating-tag { display: none !important; }
+  .footer-sub   { display: none !important; }
+
+  /* Hero: compact horizontal band instead of full-screen height */
+  .hero {
+    min-height: auto !important;
+    padding: 1.5rem 2rem !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 1.5rem !important;
+  }
+
+  /* Avatar: keep for visual identity, smaller, no ring animation */
+  .hero-visual {
+    flex-shrink: 0 !important;
+    width: 90px !important;
+    height: 90px !important;
+  }
+  .hero-visual::before,
+  .hero-visual::after { display: none !important; }
+
+  /* Card paging */
+  .skill-card, .timeline-card, .highlight-card,
+  .pillar-card, .contact-card { break-inside: avoid; }
+
+  /* Contact section starts on a fresh page */
+  #contact { break-before: page; }
+
+  /* Show LinkedIn URL as readable text after the card */
+  .contact-card[href^="https"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.75rem;
+    color: #4a4a68;
+    word-break: break-all;
+  }
+
   a { text-decoration: none !important; }
 }
 

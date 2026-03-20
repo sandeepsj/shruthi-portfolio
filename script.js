@@ -34,6 +34,7 @@ const fadeObserver = new IntersectionObserver(
       if (entry.isIntersecting) {
         entry.target.style.opacity = '1';
         entry.target.style.transform = 'translateY(0)';
+        entry.target.dataset.fadeVisible = '1';
         fadeObserver.unobserve(entry.target);
       }
     });
@@ -46,4 +47,33 @@ fadeTargets.forEach((el) => {
   el.style.transform = 'translateY(20px)';
   el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
   fadeObserver.observe(el);
+});
+
+// Print mode: reveal fade-in elements and restore after print
+function beforePrint() {
+  document.body.classList.add('is-printing');
+  // Force-reveal elements still hidden by the scroll animation
+  fadeTargets.forEach((el) => {
+    el.style.opacity = '1';
+    el.style.transform = 'translateY(0)';
+  });
+}
+
+function afterPrint() {
+  document.body.classList.remove('is-printing');
+  // Re-hide elements that haven't been scrolled into view yet
+  fadeTargets.forEach((el) => {
+    if (!el.dataset.fadeVisible) {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+    }
+  });
+}
+
+window.addEventListener('beforeprint', beforePrint);
+window.addEventListener('afterprint', afterPrint);
+
+// Safari/Chrome matchMedia fallback
+window.matchMedia('print').addEventListener('change', (mq) => {
+  if (mq.matches) { beforePrint(); } else { afterPrint(); }
 });
