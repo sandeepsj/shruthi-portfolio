@@ -21,36 +21,92 @@
   .hero-blob    { display: none !important; }
   .floating-tag { display: none !important; }
   .footer-sub   { display: none !important; }
+  .footer           { display: none !important; }
+  .pdf-download-wrap { display: none !important; }
 
-  /* Hero: compact horizontal band instead of full-screen height */
+  /* Hero: compact horizontal band with soft gradient accent */
   .hero {
     min-height: auto !important;
     padding: 1.5rem 2rem !important;
     display: flex !important;
     align-items: center !important;
     gap: 1.5rem !important;
+    background: linear-gradient(135deg, #fff8f5 0%, #f0faf8 100%) !important;
+    border-radius: 12px !important;
   }
 
-  /* Avatar: keep for visual identity, smaller, no ring animation */
+  /* Avatar: keep for visual identity, no ring animation */
   .hero-visual {
     flex-shrink: 0 !important;
-    width: 90px !important;
-    height: 90px !important;
+    width: 150px !important;
+    height: 150px !important;
+    position: relative !important;
   }
   .hero-visual::before,
   .hero-visual::after { display: none !important; }
 
+  /* Fix avatar-ring — reset absolute positioning since transform:none breaks translate(-50%,-50%) */
+  .avatar-ring {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    width: 100% !important;
+    height: 100% !important;
+    transform: none !important;
+  }
+
+  /* Reduce section padding so content isn't pushed down */
+  .section { padding: 1.5rem 0 !important; }
+
+  /* Keep section heading glued to first content item — no break after title */
+  .section-label, .section-title { break-after: avoid !important; }
+
   /* Card paging */
   .skill-card, .timeline-card, .highlight-card,
-  .pillar-card, .contact-card { break-inside: avoid; }
+  .pillar-card { break-inside: avoid; }
 
-  /* Each section starts on a fresh page */
-  #about, #experience, #skills, #philosophy, #contact { break-before: page; }
+  /* Contact cards: compact pill cards in a horizontal row */
+  .contact-cards {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    gap: 0.75rem !important;
+    justify-content: center !important;
+    margin-top: 1.5rem !important;
+  }
+  .contact-card {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 0.2rem !important;
+    background: var(--orange-light) !important;
+    border: 1.5px solid var(--border) !important;
+    box-shadow: none !important;
+    border-radius: 12px !important;
+    padding: 0.6rem 1.2rem !important;
+    min-width: 140px !important;
+  }
+  .cc-icon { display: none !important; }
+  .cc-label {
+    font-size: 0.7rem !important;
+    font-weight: 800 !important;
+    color: var(--orange) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+  }
+  .cc-value {
+    color: var(--text) !important;
+    font-size: 0.85rem !important;
+    font-weight: 600 !important;
+    text-align: center !important;
+  }
 
-  /* Show LinkedIn URL as readable text after the card */
-  .contact-card[href^="https"]::after {
-    content: " (" attr(href) ")";
-    font-size: 0.75rem;
+  /* Show LinkedIn URL below value */
+  .contact-card[href^="https"] .cc-value::after {
+    content: attr(href);
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 400;
     color: #4a4a68;
     word-break: break-all;
   }
@@ -96,6 +152,16 @@ body {
 }
 
 a { text-decoration: none; color: inherit; }
+
+/* Hidden on screen, shown only in print */
+.print-only { display: none; }
+@media print {
+  .print-only { display: flex !important; }
+  .print-portfolio-link {
+    text-decoration: underline !important;
+    color: var(--orange) !important;
+  }
+}
 ul { list-style: none; }
 
 /* =========================================================
@@ -689,6 +755,11 @@ ul { list-style: none; }
   max-width: 500px;
   margin: -2.5rem auto 3rem;
   font-size: 1rem;
+}
+
+.pdf-download-wrap {
+  text-align: center;
+  margin-bottom: 2rem;
 }
 
 .contact-cards {
